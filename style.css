@@ -25,6 +25,10 @@ header {
 	text-transform: uppercase;
 }
 
+.and {
+	cursor: pointer;
+}
+
 .heading {
     text-align: center;
 }

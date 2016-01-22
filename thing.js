@@ -10,13 +10,19 @@ function choose(choices,total_weight) {
 	}
 }
 
-function intersection(combo) {
+function intersection(combo,ands) {
 	var strings = combo.map(function(c){return strings_in[c];});
 
 	var s = strings[0];
+	var c;
+	var filter_functions = {
+		'and': function(s,c) {return s.filter(function(w){return c.indexOf(w)>=0})},
+		'or': function(s,c) {return s.concat(c.filter(function(w){return s.indexOf(w)==-1}))},
+		'not': function(s,c) {return s.filter(function(w){return c.indexOf(w)==-1})}
+	};
 	for(var i=1;i<combo.length;i++) {
-		var c = strings[i];
-		s = s.filter(function(w){return c.indexOf(w)>=0});
+		c = strings[i];
+		s = filter_functions[ands[i-1]](s,c);
 	}
 	return s;
 }
@@ -29,14 +35,43 @@ function describe(n,combo) {
 	a.innerText = descriptions[combo[n]];
 }
 
-function show() {
-	var combo = choose(weights,total_weight);
-	var words = intersection(combo);
+var and_options = ['and','not'];
+var and_labels = {
+	'and': 'and in',
+	'not': 'and not in'
+};
+var ands = ['and','and'];
+
+function make_and_toggle(n) {
+	var toggle = document.getElementById('and-'+n);
+	function set_toggle(i) {
+		ands[n] = and_options[i];
+		toggle.innerText = and_labels[ands[n]];
+		toggle.setAttribute('data-option',ands[n]);
+	}
+	toggle.addEventListener('click',function() {
+		var i = and_options.indexOf(toggle.getAttribute('data-option'));
+		i = (i+1)%and_options.length;
+		set_toggle(i);
+		show_intersection();
+	});
+	set_toggle(0);
+}
+make_and_toggle(0);
+make_and_toggle(1);
+
+var combo;
+
+function pick_combo() {
+	combo = choose(weights,total_weight);
 
 	describe(0,combo);
 	describe(1,combo);
 	describe(2,combo);
-
+	show_intersection();
+}
+function show_intersection() {
+	var words = intersection(combo,ands);
 	var ul = document.getElementById('list');
 	ul.innerHTML = '';
 	words.forEach(function(word) {
@@ -45,6 +80,6 @@ function show() {
 		ul.appendChild(li);
 	});
 }
-show();
+pick_combo();
 
-document.getElementById('go').addEventListener('click',show);
+document.getElementById('go').addEventListener('click',pick_combo);
