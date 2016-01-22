@@ -2,7 +2,7 @@ var descriptions =
 {
 	"humans/firstNames.json": "First names of men and women, pulled from the US Census for the 2000s",
 	"foods/apple_cultivars.json": "The 1000 most popular apple cultivars in the USDA's Pomological Watercolor collection",
-	"games/pokemon.json": "Pokémon",
+	"games/pokemon.json": "PokÃ©mon",
 	"corporations/djia.json": "Corporations of the Dow Jones Industrial Average",
 	"humans/suffixes.json": "Suffixes taken from a form on an airline website",
 	"words/crash_blossoms.json": "Confusing or misleading headlines",
@@ -34,7 +34,7 @@ var descriptions =
 	"animals/birds_antarctica.json": "Birds of Antarctica, grouped by family",
 	"corporations/cars.json": "A list of car manufacturers",
 	"words/literature/mr_men_little_miss.json": "Mr Men and Little Miss characters",
-	"words/literature/shakespeare_phrases.json": "Phrasess coined by Shakespeare",
+	"words/literature/shakespeare_phrases.json": "Phrases coined by Shakespeare",
 	"foods/beer_categories.json": "A list of beer categories",
 	"instructions/laundry_care.json": "A list of laundry care instructions",
 	"words/adjs.json": "A list of English adjectives",

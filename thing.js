@@ -16,7 +16,6 @@ function intersection(combo) {
 	var s = strings[0];
 	for(var i=1;i<combo.length;i++) {
 		var c = strings[i];
-		console.log(c);
 		s = s.filter(function(w){return c.indexOf(w)>=0});
 	}
 	return s;
